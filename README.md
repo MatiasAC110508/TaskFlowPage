@@ -28,6 +28,3 @@ User can edit or delete tasks.
 
 Table updates automatically and hides if empty.
 
-Si quieres, puedo hacer una versión aún más resumida de 2-3 líneas para ponerla en la cabecera del JS como comentario.
-
-¿Quieres que haga eso?

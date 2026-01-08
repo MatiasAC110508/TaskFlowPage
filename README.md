@@ -1,4 +1,4 @@
-Task Manager JS – Simple Documentation
+**Task Manager JS – Simple Documentation**
 
 This JavaScript file is used to manage a task list.
 

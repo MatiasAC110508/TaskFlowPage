@@ -1,0 +1,124 @@
+:root {
+    --primary-color: #1D52F2;
+    --secondary-color: #809DF2;
+    --text-color: #212226;
+    --accent-color: #1d64f2e3;
+    --background-color: #F2F2F2;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    font-family: sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 1rem;
+}
+
+h1{
+    margin: 2rem;
+    background-color: var(--primary-color);
+    padding: 1.5rem 100%;
+    border-radius: 8px;
+    color: white;
+    box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
+    width: 18rem;
+    height: auto;
+}
+
+.label-container {
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    margin: 0.5rem 0rem;
+}
+
+label{
+    font-weight: bold;
+    margin-bottom: 0.2rem; 
+}
+
+#prioridad {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0rem 0.8rem;
+}
+
+input, select, textarea, button{
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+}
+
+select:hover {
+    box-shadow: 0 0 10px var(--secondary-color)
+}
+
+input:focus, textarea:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 10px var(--secondary-color);
+}
+
+table {
+    width: 80%;
+    margin-top: 2rem;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.divs-table {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: var(--text-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--accent-color);
+}

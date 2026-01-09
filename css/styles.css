@@ -25,13 +25,14 @@ body{
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-    padding: 1rem;
+    padding: 1rem 2rem;
 }
 
 h1{
-    margin: 2rem;
+    width: 26rem;
+    height: auto;
     background-color: var(--primary-color);
-    padding: 1.5rem 100%;
+    padding: 1rem 2rem;
     border-radius: 8px;
     color: white;
     box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
@@ -45,15 +46,16 @@ form{
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
-    width: 18rem;
+    width: 26rem;
     height: auto;
 }
 
 .label-container {
-    justify-content: space-between;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     text-align: left;
-    margin: 0.5rem 0rem;
+    margin: 1rem 0rem;
 }
 
 label{
@@ -62,9 +64,8 @@ label{
 }
 
 #prioridad {
-    margin-top: 1rem;
+    margin: 1rem 0rem;
     display: flex;
-    gap: 0rem 0.8rem;
 }
 
 #prioridad-label {
@@ -90,35 +91,33 @@ input:focus, textarea:focus {
 }
 
 table {
-    width: 80%;
-    margin-top: 2rem;
-    border-collapse: collapse;
     background-color: white;
     box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
     border-radius: 8px;
     overflow: hidden;
+    width: 26rem;
 }
-
-th, td {
-    padding: 1rem;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-}
-
 th {
     background-color: var(--primary-color);
     color: white;
+    padding: 0.8rem 1rem;
+    text-align: center;
+}
+
+td {
+    padding: 0.5rem 0.5rem;
+    text-align: center;
 }
 
 .divs-table {
     display: inline-block;
-    width: 100%;
     box-sizing: border-box;
 }
 
 button {
     background-color: var(--text-color);
     color: white;
+    margin-top: 0.5rem;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -126,4 +125,9 @@ button {
 
 button:hover {
     background-color: var(--accent-color);
+}
+
+#mensaje {
+    color: red;
+    margin-top: 1rem;
 }

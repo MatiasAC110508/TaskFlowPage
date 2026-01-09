@@ -96,6 +96,7 @@ table {
     border-radius: 8px;
     overflow: hidden;
     width: 26rem;
+    border-collapse: collapse;
 }
 th {
     background-color: var(--primary-color);

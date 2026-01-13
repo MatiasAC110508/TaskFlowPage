@@ -24,6 +24,21 @@ body{
     color: var(--text-color);
 }
 
+header{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+header h1{
+    min-width: 80%;
+}
+
+header form{
+    display: flex;
+    flex-direction: row;  
+    min-width: 20%;
+}
 
 h1{
     min-width: 100%;

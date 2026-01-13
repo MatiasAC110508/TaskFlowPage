@@ -1,13 +1,26 @@
+
 const form = document.getElementById('myform');
 const tbody = document.querySelector('#tabla tbody');
 const tabla = document.getElementById('tabla');
 const STORAGE_KEY = 'listadoForm';
 const btnSubmit = form.querySelector('button[type="submit"]');
 
+ // capturando los datos del filtro
+const formSearch = document.getElementById('formSearch');
+
+const mensajeFiltro = document.getElementById('mensajeFiltro');
+
 let editId = null;
 
 // Cargar datos al iniciar
 document.addEventListener('DOMContentLoaded', cargarTabla);
+
+formSearch.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const texto = document.getElementById('searchFilter').value.trim();
+  filtrarTabla(texto);
+});
+
 
 form.addEventListener('submit', function (event) {
   event.preventDefault();
@@ -22,6 +35,9 @@ form.addEventListener('submit', function (event) {
   const importanceValue = importanceSelect.value;
   const importanceText = importanceSelect.options[importanceSelect.selectedIndex].text;
   const mensajeaDiv = document.getElementById('mensaje');
+  const searchInput = document.getElementById('searchFilter').value.trim();
+  
+  
 
   // Validación: no permitir campos vacíos
   if (!title || !description) {
@@ -70,6 +86,7 @@ form.addEventListener('submit', function (event) {
 
     guardarRegistro(registro);
     agregarFila(registro);
+    
   }
 
   form.reset();
@@ -92,6 +109,8 @@ function actualizarRegistro(id, nuevosDatos) {
 
 // Cargar tabla
 function cargarTabla() {
+  limpiarTabla()
+  
   const data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
   if (data.length === 0) {
     actualizarVisibilidadTabla();
@@ -103,12 +122,12 @@ function cargarTabla() {
 
 // Agregar fila (filtra "In Progress")
 function agregarFila(registro) {
-  if (registro.statusValue === 'In Progress') return;
+  //if (registro.statusValue === 'In Progress') return;
 
   const tr = document.createElement('tr');
   tr.dataset.id = registro.id;
 
-  tr.innerHTML = `
+ /*  tr.innerHTML = `
     <thead>
     <tr>
       <th >Title</th><td id="scroll">${registro.title}</td>
@@ -123,6 +142,17 @@ function agregarFila(registro) {
     <button class="btn-edit">Edit</button>
     <button class="btn-delete">Delete</button>
   </td>
+  `; */
+
+    tr.innerHTML = `
+    <td>${registro.title}</td>
+    <td>${registro.description}</td>
+    <td>${registro.statusText}</td>
+    <td>${registro.importanceText}</td>
+    <td>
+      <button class="btn-edit">Edit</button>
+      <button class="btn-delete">Delete</button>
+    </td>
   `;
 
   tbody.appendChild(tr);
@@ -132,6 +162,9 @@ function agregarFila(registro) {
 function limpiarTabla() {
   tbody.innerHTML = '';
 }
+
+
+
 
 // Delegación de eventos
 tbody.addEventListener('click', function (e) {
@@ -178,4 +211,39 @@ function actualizarVisibilidadTabla() {
   const data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
   const visibles = data.filter(r => r.statusValue !== 'In Progress');
   tabla.style.display = visibles.length === 0 ? 'none' : 'table';
+}
+
+
+// Filtrar mediante el buscador
+function filtrarTabla(texto) {
+ 
+  limpiarTabla();
+  mensajeFiltro.textContent = '';
+
+  // trae los datos del local storage
+  const data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+  // si no hay datos imprime como vacio
+  if (texto === '') {
+    cargarTabla();
+    return;
+  }
+ //  variable que toma la información de data, la filtra por parametro sea titulo o descripción y lo muestra
+  const filtrados = data.filter(reg =>
+    reg.statusValue !== 'In Progress' &&
+    (
+      reg.title.toLowerCase().includes(texto.toLowerCase()) ||
+      reg.description.toLowerCase().includes(texto.toLowerCase())
+    )
+  );
+  // verifica si los datos filtrados tienen cero caracteres para mostrar el mensaje de error al filtrarlos
+  if (filtrados.length === 0) {
+    mensajeFiltro.textContent = 'No se encontraron resultados para la búsqueda';
+    tabla.style.display = 'none';
+    return;
+  }
+  // recore los datos y los muestra en la tabla
+  filtrados.forEach(reg => agregarFila(reg));
+  tabla.style.display = 'table';
+  
 }

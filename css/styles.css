@@ -23,7 +23,7 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center;
-    gap: 4rem;
+    gap: 2rem;
     font-family: sans-serif;
     color: var(--text-color);
     min-height: 100vh;
@@ -31,14 +31,28 @@ body{
     padding: 1rem;
 }
 
+header {
+    width: 26rem;
+}
+
+header form button {
+    max-width: 100%;
+}
 
 h1{
-    min-width: 100%;
-    height: auto;
+    max-width: 100%;
     background-color: var(--primary-color);
-    padding: 1rem 2rem;
+    padding: 0.5rem;
     color: white;
-    box-shadow: 0px 10px 8px rgba(0,0,0,0.1);
+    border-radius: 8px 8px 0px 0px;
+}
+
+#formSearch {
+    border-radius: 0px 0px 8px 8px;
+}
+
+#searchFilter, .btn-outline-success{
+    width: 100%;
 }
 
 form{
@@ -147,14 +161,8 @@ button:hover {
 
 @media (max-width: 600px) {
 
-    body {
-        gap: 2rem;
-    }
-
-    h1 {
-        font-size: 1.4rem;
-        padding: 1rem;
-        text-align: center;
+    header {
+        width: 100%;
     }
 
     form {
@@ -181,7 +189,7 @@ button:hover {
     }
 
     table {
-        width: 100%;
+        max-width: 100%;
     }
 
     th,
@@ -189,23 +197,9 @@ button:hover {
         min-width: 100%;
         
     }
-
-    th {
-        font-size: 1rem;
-    }
-
-    td {
-        margin: 0.3rem 0;
-    }
-
-    button {
-        width: 100%;
-    }
-
-    #scroll {
-        overflow-x: auto;
-    }
 }
+
+
 
 
 

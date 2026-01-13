@@ -7,7 +7,6 @@ const btnSubmit = form.querySelector('button[type="submit"]');
 
  // capturando los datos del filtro
 const formSearch = document.getElementById('formSearch');
-
 const mensajeFiltro = document.getElementById('mensajeFiltro');
 
 let editId = null;
@@ -15,12 +14,10 @@ let editId = null;
 // Cargar datos al iniciar
 document.addEventListener('DOMContentLoaded', cargarTabla);
 
-formSearch.addEventListener('submit', function (e) {
-  e.preventDefault();
-  const texto = document.getElementById('searchFilter').value.trim();
-  filtrarTabla(texto);
-});
 
+document.getElementById('searchFilter').addEventListener('input', e => {
+  filtrarTabla(e.target.value.trim());
+});
 
 form.addEventListener('submit', function (event) {
   event.preventDefault();
@@ -215,35 +212,31 @@ function actualizarVisibilidadTabla() {
 
 
 // Filtrar mediante el buscador
-function filtrarTabla(texto) {
- 
+function filtrarTabla(criterio) {
   limpiarTabla();
   mensajeFiltro.textContent = '';
 
-  // trae los datos del local storage
   const data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  const texto = criterio.toLowerCase();
 
-  // si no hay datos imprime como vacio
-  if (texto === '') {
-    cargarTabla();
+  if (!texto) {
+    // Si no hay búsqueda, mostrar todos los registros
+    data.forEach(reg => agregarFila(reg));
+    actualizarVisibilidadTabla();
     return;
   }
- //  variable que toma la información de data, la filtra por parametro sea titulo o descripción y lo muestra
+
   const filtrados = data.filter(reg =>
-    reg.statusValue !== 'In Progress' &&
-    (
-      reg.title.toLowerCase().includes(texto.toLowerCase()) ||
-      reg.description.toLowerCase().includes(texto.toLowerCase())
-    )
+    reg.title.toLowerCase().includes(texto) ||
+    reg.description.toLowerCase().includes(texto) ||
+    reg.statusText.toLowerCase().includes(texto) ||
+    reg.importanceText.toLowerCase().includes(texto)
   );
-  // verifica si los datos filtrados tienen cero caracteres para mostrar el mensaje de error al filtrarlos
+
   if (filtrados.length === 0) {
     mensajeFiltro.textContent = 'No se encontraron resultados para la búsqueda';
-    tabla.style.display = 'none';
-    return;
   }
-  // recore los datos y los muestra en la tabla
+
   filtrados.forEach(reg => agregarFila(reg));
-  tabla.style.display = 'table';
-  
+  actualizarVisibilidadTabla();
 }

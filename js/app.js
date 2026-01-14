@@ -119,27 +119,12 @@ function cargarTabla() {
 
 // Agregar fila (filtra "In Progress")
 function agregarFila(registro) {
-  //if (registro.statusValue === 'In Progress') return;
+  // se borra los deja estos datos actualizados
+  if (registro.statusValue === 'In Progress') return;
 
   const tr = document.createElement('tr');
   tr.dataset.id = registro.id;
 
- /*  tr.innerHTML = `
-    <thead>
-    <tr>
-      <th >Title</th><td id="scroll">${registro.title}</td>
-      <th >Description</th><td id="scroll">${registro.description}</td>
-      <th>Status</th><td>${registro.statusText}</td>
-      <th>Importance</th><td>${registro.importanceText}</td>
-      <th>Actions</th>
-    </tr>
-  </thead>
-
-  <td>
-    <button class="btn-edit">Edit</button>
-    <button class="btn-delete">Delete</button>
-  </td>
-  `; */
 
     tr.innerHTML = `
     <td>${registro.title}</td>

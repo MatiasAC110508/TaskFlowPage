@@ -5,18 +5,26 @@
     --blue-primary: #163169; 
     --blue-light: #ecf1ff;   
     background: linear-gradient(
-    to bottom,
-    #000000 0%,
-    #060d22 50%,
-    #000000 100%
+        to bottom,
+        #000000 0%,
+        #060d22 50%,
+        #000000 100%
     );
 }
+
+/* =====================
+   Reset
+===================== */
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+/* =====================
+   Base
+===================== */
 
 body{
     display: flex;
@@ -31,6 +39,10 @@ body{
     background-attachment: fixed;
     padding: 1rem;
 }
+
+/* =====================
+   Header
+===================== */
 
 header {
     width: 26rem;
@@ -52,9 +64,14 @@ h1{
     border-radius: 0px 0px 8px 8px;
 }
 
-#searchFilter, .btn-outline-success{
+#searchFilter,
+.btn-outline-success{
     width: 100%;
 }
+
+/* =====================
+   Form
+===================== */
 
 form{
     display: flex;
@@ -82,8 +99,9 @@ label{
     margin-bottom: 0.2rem; 
 }
 
-#importance, #status {
-  background-color: #0A1A3A;
+#importance,
+#status {
+    background-color: #0A1A3A;
 }
 
 #prioridad-label {
@@ -92,13 +110,20 @@ label{
     width: 14rem;
 }
 
+/* =====================
+   Inputs
+===================== */
+
 input::placeholder,
 textarea::placeholder {
-  color: var(--blue-light);
-  opacity: 1;
+    color: var(--blue-light);
+    opacity: 1;
 }
 
-input, select, textarea, button {
+input,
+select,
+textarea,
+button {
     padding: 0.5rem;
     border: none;
     border-radius: 8px;
@@ -108,40 +133,63 @@ input, select, textarea, button {
     color: var(--blue-light);
 }
 
+/* =====================
+   Tables (Cards)
+===================== */
+
 table {
     background-color: var(--blue-dark);
     box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
     border-radius: 8px; 
+    margin-bottom: 2rem;
+    width: 100%;
+    min-width: 26rem;
 }
+
+th,
+td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ---- Table Head ---- */
 
 th {
     background-color: var(--blue-primary);
     color: var(--withe);
-    padding: 0.5rem 0rem;
+    padding: 0.5rem;
     text-align: center;
     border-radius: 8px;
     transition: 0.3s ease;  
-    display: block;
-    min-width: 26rem;
-    
 }
+
+/* ---- Table Data ---- */
 
 td {
     padding: 0.5rem 1rem;
-    max-width: 18rem;
     border-radius: 8px;
-    margin: 0.5rem;
-    display: block;
-    min-width: 26rem;
+    margin: 0.5rem 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
+/* =====================
+   Scroll text
+===================== */
+
 #scroll {
-    overflow-x: scroll;
+    overflow-x: auto;
     scrollbar-width: thin;
     scrollbar-color: #3c4469 transparent;
 }
+
+/* =====================
+   Buttons
+===================== */
+
 button {
-    background-color: var(--black) ;
+    background-color: var(--black);
     color: white;
     margin: 0.1rem 0rem;
     border: none;
@@ -151,22 +199,32 @@ button {
 }
 
 button:hover {
-    background-color:var(--blue-primary);
+    background-color: var(--blue-primary);
 }
+
+/* =====================
+   Messages
+===================== */
 
 #mensaje {
     color: orange;
     margin-top: 1rem;
 }
 
+/* =====================
+   Responsive
+===================== */
+
 @media (max-width: 600px) {
 
     header {
         width: 100%;
+        max-width: 20rem;
     }
 
     form {
         width: 100%;
+        max-width: 20rem;
         padding: 1.5rem;
     }
 
@@ -189,16 +247,16 @@ button:hover {
     }
 
     table {
-        max-width: 100%;
+        width: 100%;
+        min-width: 20rem;
     }
 
     th,
     td {
-        min-width: 100%;
-        
+        width: 100%;
+        font-size: 0.95rem;
     }
 }
-
 
 
 

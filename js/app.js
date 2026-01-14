@@ -1,22 +1,24 @@
-
 const form = document.getElementById('myform');
-const tbody = document.querySelector('#tabla tbody');
-const tabla = document.getElementById('tabla');
 const formSearch = document.getElementById('formSearch');
 const mensaje = document.getElementById('mensaje');
 const mensajeFiltro = document.getElementById('mensajeFiltro');
 const searchInput = document.getElementById('searchFilter');
+const contenedor = document.getElementById('contenedor-tablas');
 
 const STORAGE_KEY = 'listadoForm';
 let editId = null;
 
-document.addEventListener('DOMContentLoaded', cargarTabla);
+document.addEventListener('DOMContentLoaded', cargarTareas);
 
 formSearch.addEventListener('submit', e => e.preventDefault());
 
 searchInput.addEventListener('input', e => {
-  filtrarTabla(e.target.value.trim());
+  filtrarTareas(e.target.value.trim());
 });
+
+/* ======================
+   Submit del formulario
+====================== */
 
 form.addEventListener('submit', e => {
   e.preventDefault();
@@ -48,8 +50,12 @@ form.addEventListener('submit', e => {
 
   form.reset();
   editId = null;
-  cargarTabla();
+  cargarTareas();
 });
+
+/* ======================
+   LocalStorage
+====================== */
 
 function obtenerDatos() {
   return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
@@ -73,59 +79,72 @@ function eliminarRegistro(id) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
 
-function cargarTabla() {
-  limpiarTabla();
+/* ======================
+   Render de tareas
+====================== */
+
+function cargarTareas() {
+  contenedor.innerHTML = '';
   const data = obtenerDatos();
 
   if (!data.length) {
-    tabla.style.display = 'none';
+    mensajeFiltro.textContent = 'No tasks yet';
     return;
   }
 
-  data.forEach(agregarFila);
-  tabla.style.display = 'table';
+  mensajeFiltro.textContent = '';
+  data.forEach(crearCard);
 }
 
-function limpiarTabla() {
-  tbody.innerHTML = '';
-}
+function crearCard(registro) {
+  const card = document.createElement('div');
+  card.classList.add('task-card');
+  card.dataset.id = registro.id;
 
-function agregarFila(registro) {
-  const tr = document.createElement('tr');
-  tr.dataset.id = registro.id;
-
-  tr.innerHTML = `
-    <th>Title</th>
-    <td id="scroll">${registro.title}</td>
-
-    <th>Description</th>
-    <td id="scroll">${registro.description}</td>
-
-    <th>Status</th>
-    <td>${registro.statusText}</td>
-
-    <th>Importance</th>
-    <td>${registro.importanceText}</td>
-
-    <th>Actions</th>
-    <td>
-      <button class="btn-edit">Edit</button>
-      <button class="btn-delete">Delete</button>
-    </td>
+  card.innerHTML = `
+    <table>
+      <tr>
+        <th>Title</th>
+        <td>${registro.title}</td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td>${registro.description}</td>
+      </tr>
+      <tr>
+        <th>Status</th>
+        <td>${registro.statusText}</td>
+      </tr>
+      <tr>
+        <th>Importance</th>
+        <td>${registro.importanceText}</td>
+      </tr>
+      <tr>
+        <th>Actions</th>
+        <td>
+          <button class="btn-edit">Edit</button>
+          <button class="btn-delete">Delete</button>
+        </td>
+      </tr>
+    </table>
   `;
 
-  tbody.appendChild(tr);
+  contenedor.appendChild(card);
 }
 
-tbody.addEventListener('click', e => {
-  const fila = e.target.closest('tr');
-  if (!fila) return;
+/* ======================
+   Editar / Eliminar
+====================== */
 
-  const id = Number(fila.dataset.id);
+contenedor.addEventListener('click', e => {
+  const card = e.target.closest('.task-card');
+  if (!card) return;
+
+  const id = Number(card.dataset.id);
 
   if (e.target.classList.contains('btn-delete')) {
     eliminarRegistro(id);
-    cargarTabla();
+    cargarTareas();
   }
 
   if (e.target.classList.contains('btn-edit')) {
@@ -140,16 +159,19 @@ tbody.addEventListener('click', e => {
   }
 });
 
-function filtrarTabla(texto) {
+/* ======================
+   Filtro de búsqueda
+====================== */
+
+function filtrarTareas(texto) {
   const filtro = texto.toLowerCase();
   let visible = false;
 
-  tbody.querySelectorAll('tr').forEach(tr => {
-    const match = tr.textContent.toLowerCase().includes(filtro);
-    tr.style.display = match ? '' : 'none';
+  contenedor.querySelectorAll('.task-card').forEach(card => {
+    const match = card.textContent.toLowerCase().includes(filtro);
+    card.style.display = match ? '' : 'none';
     if (match) visible = true;
   });
 
-  tabla.style.display = visible ? 'table' : 'none';
   mensajeFiltro.textContent = visible ? '' : 'No results found';
 }

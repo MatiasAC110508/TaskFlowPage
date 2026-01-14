@@ -3,7 +3,12 @@
     --secondary-color: #809DF2;
     --text-color: #212226;
     --accent-color: #1d64f2e3;
-    --background-color: #F2F2F2;
+    background: linear-gradient(
+    to bottom,
+    #1d52f22f 0%,
+    #809df21f 50%,
+    #F2F2F2 100%
+    );
 }
 
 *{
@@ -18,35 +23,36 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center;
-    gap: 4rem;
+    gap: 2rem;
     font-family: sans-serif;
-    background-color: var(--background-color);
     color: var(--text-color);
+    min-height: 100vh;
+    background-attachment: fixed;
+    padding: 1rem;
 }
 
-header{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+header {
+    width: 26rem;
 }
 
-header h1{
-    min-width: 80%;
-}
-
-header form{
-    display: flex;
-    flex-direction: row;  
-    min-width: 20%;
+header form button {
+    max-width: 100%;
 }
 
 h1{
-    min-width: 100%;
-    height: auto;
+    max-width: 100%;
     background-color: var(--primary-color);
-    padding: 1rem 2rem;
+    padding: 0.5rem;
     color: white;
-    box-shadow: 0px 10px 8px rgba(0,0,0,0.1);
+    border-radius: 8px 8px 0px 0px;
+}
+
+#formSearch {
+    border-radius: 0px 0px 8px 8px;
+}
+
+#searchFilter, .btn-outline-success{
+    width: 100%;
 }
 
 form{
@@ -75,11 +81,6 @@ label{
     margin-bottom: 0.2rem; 
 }
 
-#prioridad {
-    margin: 1rem 0rem;
-    display: flex;
-}
-
 #prioridad-label {
     display: flex;
     justify-content: space-evenly;
@@ -106,17 +107,19 @@ input:focus, textarea:focus {
 table {
     background-color: white;
     box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
-    border-radius: 8px;    
-    
+    border-radius: 8px; 
 }
 
 th {
     background-color: var(--accent-color);
     color: white;
-    padding: 0rem 0.5rem;
+    padding: 0.5rem 0rem;
     text-align: center;
     border-radius: 8px;
     transition: 0.3s ease;  
+    display: block;
+    min-width: 26rem;
+    
 }
 
 th:hover {
@@ -124,11 +127,13 @@ th:hover {
 }
 
 td {
-    padding: 0rem 1rem;
+    padding: 0.5rem 1rem;
     max-width: 18rem;
     color: rgb(0, 0, 0); 
     border-radius: 8px;
     margin: 0.5rem;
+    display: block;
+    min-width: 26rem;
 }
 
 #scroll {
@@ -138,7 +143,7 @@ td {
 button {
     background-color: var(--text-color);
     color: white;
-    margin: 0.5rem;
+    margin: 0.1rem 0rem;
     border: none;
     cursor: pointer; 
     width: 90%;
@@ -154,69 +159,46 @@ button:hover {
     margin-top: 1rem;
 }
 
-@media (max-width: 1000px) {
-    body {
-        margin: 2rem;
+@media (max-width: 600px) {
+
+    header {
+        width: 100%;
     }
 
-    h1 {
-        background-size: auto;
-    }
-
-    tr {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        min-width: 40rem;
-    }
-    
-    td {
-        min-width: 40rem;
-    }
-
-    th {
-        background-color: var(--accent-color);
-        transition: 0.3s  ease;
-        padding: 1rem;
-    }
-
-    th:hover {
-        background-color: var(--text-color);
-    }
-
-}
-
-@media (max-width: 700px) {
-
-    body {
-    max-width: 100%;
-   }
-   
     form {
-        max-width: 18rem;
-   }
+        width: 100%;
+        padding: 1.5rem;
+    }
 
+    .label-container {
+        text-align: center;
+        width: 100%;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+        width: 100%;
+        font-size: 1rem;
+        margin: 0.1rem 0rem;
+    }
+
+    #prioridad-label {
+        width: 100%;
+    }
+
+    table {
+        max-width: 100%;
+    }
+
+    th,
     td {
-        min-width: 18rem;
+        min-width: 100%;
+        
     }
-
-    tr {
-        display: flex;
-        flex-direction: column;
-        min-width: 18rem;
-    }
-
-    th {
-        background-color: var(--accent-color);
-        transition: 0.3s  ease;
-        padding: 0.5rem;
-    }
-
-    th:hover {
-        background-color: var(--text-color);
-    }
-
 }
+
 
 
 

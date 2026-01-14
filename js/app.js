@@ -142,14 +142,22 @@ function agregarFila(registro) {
   `; */
 
     tr.innerHTML = `
-    <td>${registro.title}</td>
-    <td>${registro.description}</td>
-    <td>${registro.statusText}</td>
-    <td>${registro.importanceText}</td>
-    <td>
-      <button class="btn-edit">Edit</button>
-      <button class="btn-delete">Delete</button>
-    </td>
+ 
+    <thead>
+    <tr>
+      <th>Title</th><td id="scroll">${registro.title}</td>
+      <th>Description</th><td id="scroll">${registro.description}</td>
+      <th>Status</th><td>${registro.statusText}</td>
+      <th>Importance</th><td>${registro.importanceText}</td>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <td>
+    <button class="btn-edit">Edit</button>
+    <button class="btn-delete">Delete</button>
+  </td>
+  
   `;
 
   tbody.appendChild(tr);
@@ -238,5 +246,6 @@ function filtrarTabla(criterio) {
   }
 
   filtrados.forEach(reg => agregarFila(reg));
-  actualizarVisibilidadTabla();
+  tabla.style.display = 'table';
+  
 }
